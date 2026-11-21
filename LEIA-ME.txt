@@ -1,0 +1,15 @@
+MEU CONTROLE FINANCEIRO - PROJETO ANDROID
+
+Este pacote contém o código-fonte de um aplicativo Android que abre o controle financeiro em uma tela WebView. O aplicativo funciona offline e salva despesas e renda no armazenamento local do aparelho.
+
+COMO GERAR O APK
+1. Instale o Android Studio em um computador (Windows, macOS ou Linux).
+2. Abra a pasta MeuControleFinanceiro no Android Studio (File > Open).
+3. Aguarde a sincronização do Gradle e a instalação dos componentes solicitados.
+4. Selecione Build > Build Bundle(s) / APK(s) > Build APK(s).
+5. Ao terminar, clique em Locate. O APK de depuração estará em app/build/outputs/apk/debug/app-debug.apk.
+6. Transfira o APK para o Android e autorize a instalação de aplicativos dessa origem, se solicitado.
+
+Requisitos de compilação: Android Studio recente, JDK 17 e conexão à internet na primeira sincronização para baixar o Android Gradle Plugin e o SDK.
+
+IMPORTANTE: este pacote é o projeto-fonte, não um APK já compilado. O ambiente em que o arquivo foi preparado não possui Android SDK/Gradle para compilar e assinar o APK. O armazenamento é local ao app; faça exportações CSV periódicas como cópia de segurança. Desinstalar o app pode apagar os dados locais.
