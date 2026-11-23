@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071b3b">
+<title>Meu Controle Financeiro</title>
+<style>
+:root{--navy:#071b3b;--navy2:#0d2d5d;--gold:#e8b943;--bg:#f3f6fb;--card:#fff;--text:#12213b;--muted:#68758a;--line:#e2e8f0;--green:#159957;--red:#d94343;--shadow:0 8px 24px #0b245012}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:82px}
+header{background:linear-gradient(145deg,var(--navy),var(--navy2));color:white;padding:23px 18px 25px;border-radius:0 0 25px 25px;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;width:230px;height:230px;border:24px solid #e8b94330;border-radius:50%;right:-100px;top:-130px}
+.brand{font-size:12px;letter-spacing:.13em;color:#d8e5f8;font-weight:800}.brand b{color:var(--gold)}h1{font-size:25px;margin:5px 0 20px}.balance-label{font-size:12px;color:#cbd8ec}.total{font-size:34px;font-weight:850;letter-spacing:-1px;margin:3px 0 15px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats div{background:#ffffff16;border:1px solid #ffffff25;border-radius:14px;padding:11px}.stats small{display:block;color:#d5e1f2}.stats strong{font-size:17px;display:block;margin-top:4px}
+.wrap{max-width:720px;margin:auto;padding:15px}.page{display:none}.page.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.card h2{font-size:17px;margin:0 0 13px}.muted{color:var(--muted)}.field{margin:10px 0}.field label{display:block;font-size:12px;font-weight:750;color:var(--muted);margin-bottom:6px}
+input,select{width:100%;border:1px solid #d5deea;border-radius:11px;padding:12px;font:inherit;background:white;color:var(--text);min-height:45px}button{border:0;border-radius:11px;padding:12px 14px;font:inherit;font-weight:750;cursor:pointer}.primary{background:var(--gold);color:#17233a;width:100%;margin-top:7px}.secondary{background:#edf2f9;color:var(--navy)}.danger{background:#fff0ef;color:var(--red)}.green{background:#e8f7ef;color:#087944}.row{display:flex;gap:9px}.row>*{flex:1;min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.quick{display:flex;gap:9px;margin:12px 0}.quick button{flex:1}.item{border:1px solid var(--line);border-radius:13px;padding:12px;margin:9px 0;background:#fff}.itemtop{display:flex;justify-content:space-between;gap:10px}.itemname{font-weight:800}.meta{font-size:12px;color:var(--muted);margin-top:3px}.amount{font-weight:850;white-space:nowrap}.status{font-size:11px;border-radius:30px;padding:4px 8px;display:inline-block;margin-top:5px}.paid{background:#e6f7ed;color:#087944}.pending{background:#fff4d8;color:#805700}.summaryrow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line)}.summaryrow:last-child{border:0}.positive{color:var(--green)}.negative{color:var(--red)}.empty{text-align:center;color:var(--muted);padding:22px 8px}.tabs{display:flex;gap:6px;margin:10px 0 13px}.tabs button{flex:1;background:#edf2f9;color:var(--muted);padding:9px 5px;font-size:12px}.tabs button.active{background:var(--navy);color:white}.bank-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.bank{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 5px;font-size:12px}.bank.selected{outline:2px solid var(--gold);border-color:var(--gold)}.swatch{width:22px;height:22px;border-radius:7px;margin:0 auto 6px}.bankcard{border-radius:18px;padding:18px;color:white;min-height:150px;margin:12px 0;background:linear-gradient(130deg,var(--bank,#172d52),#07152b);position:relative;overflow:hidden}.bankcard:after{content:"";position:absolute;width:150px;height:150px;border:18px solid #ffffff18;border-radius:50%;right:-65px;top:45px}.bankcard .bankname{font-weight:850;font-size:19px}.bankcard .last{font-size:18px;letter-spacing:3px;margin:22px 0 12px}.bankcard small{color:#d9e4f4}.bar{height:9px;background:#e9eef5;border-radius:9px;overflow:hidden;margin:8px 0}.bar span{display:block;height:100%;background:var(--gold);border-radius:9px}.nav{position:fixed;bottom:0;left:0;right:0;background:var(--navy);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 5px calc(8px + env(safe-area-inset-bottom));z-index:5}.nav button{background:transparent;color:#c7d4e8;padding:5px 2px;font-size:10px}.nav button.active{color:var(--gold)}.nav span{display:block;font-size:19px;margin-bottom:2px}.hint{font-size:12px;color:var(--muted);line-height:1.45}.pill{display:inline-block;border-radius:30px;background:#fff4d8;color:#795500;padding:5px 9px;font-size:11px;font-weight:750}.chart{display:flex;align-items:end;gap:10px;height:125px;padding:10px 4px 0;border-bottom:1px solid var(--line)}.barcol{flex:1;text-align:center;font-size:10px;color:var(--muted)}.bars{height:95px;display:flex;align-items:end;justify-content:center;gap:4px}.bars i{display:block;width:13px;border-radius:5px 5px 0 0;min-height:2px}.foot{text-align:center;color:var(--muted);font-size:11px;padding:10px 0 20px}
+body.dark{--bg:#08152a;--card:#102440;--text:#edf3ff;--muted:#a9b8ce;--line:#29415e;--shadow:0 8px 24px #0003}body.dark input,body.dark select,body.dark .item,body.dark .bank{background:#132b49;color:#edf3ff;border-color:#35506e}body.dark .secondary,body.dark .tabs button{background:#1b3658;color:#dce8fa}body.dark .tabs button.active{background:var(--gold);color:#14213a}
+</style></head>
+<body>
+<header>
+ <div class="brand">ORGANIZE SEU DINHEIRO · <b>MCF</b></div>
+ <h1>Meu Controle Financeiro</h1>
+ <div class="balance-label">SALDO DO MÊS</div><div class="total" id="balance">R$ 0,00</div>
+ <div class="stats"><div><small>Receitas</small><strong id="incomeTotal">R$ 0,00</strong></div><div><small>Despesas</small><strong id="expenseTotal">R$ 0,00</strong></div></div>
+</header>
+<main class="wrap">
+<section class="page active" id="home">
+ <div class="card"><h2>📅 Visão mensal</h2><div class="row"><input id="monthSelect" type="month" aria-label="Selecionar mês"><button class="secondary" id="currentMonth">Hoje</button></div></div>
+ <div class="quick"><button class="green" id="goIncome">＋ Receita</button><button class="danger" id="goExpense">－ Despesa</button></div>
+ <div class="card"><h2>Resumo do mês</h2><div class="summaryrow"><span class="muted">Saldo disponível</span><strong id="homeBalance">R$ 0,00</strong></div><div class="summaryrow"><span class="muted">Contas pendentes</span><strong id="homePending">R$ 0,00</strong></div><div class="summaryrow"><span class="muted">Boletos cadastrados</span><strong id="homeBills">0</strong></div></div>
+ <div class="card"><h2>Meus cartões</h2><div id="homeCards" class="hint">Nenhum cartão cadastrado.</div><button class="secondary" style="width:100%;margin-top:10px" data-goto="cards">Gerenciar cartões</button></div>
+ <div class="card"><h2>Próximos boletos</h2><div id="homeBillsList" class="hint">Nenhum boleto cadastrado.</div><button class="secondary" style="width:100%;margin-top:10px" data-goto="bills">Ver boletos e compras</button></div>
+</section>
+
+<section class="page" id="transactions">
+ <div class="card"><h2 id="transactionTitle">＋ Nova movimentação</h2>
+ <div class="tabs"><button class="active" id="typeExpense" type="button">Despesa</button><button id="typeIncome" type="button">Receita</button></div>
+ <form id="transactionForm">
+  <div class="field"><label for="description">Descrição</label><input id="description" required maxlength="70" placeholder="Ex.: salário, mercado, aluguel"></div>
+  <div class="field"><label for="category">Categoria</label><select id="category"><option>Casa</option><option>Alimentação</option><option>Transporte</option><option>Saúde</option><option>Educação</option><option>Salário</option><option>Vendas</option><option>Outros</option></select></div>
+  <div class="field"><label for="value">Valor (R$)</label><input id="value" type="number" min="0.01" step="0.01" inputmode="decimal" required placeholder="0,00"></div>
+  <div class="field"><label for="due">Data</label><input id="due" type="date"></div>
+  <button class="primary" type="submit">Salvar movimentação</button>
+ </form></div>
+ <div class="card"><h2>Movimentações do mês</h2><div id="transactionList"></div></div>
+</section>
+
+<section class="page" id="cards">
+ <div class="card"><h2>💳 Adicionar cartão</h2>
+  <p class="hint">Escolha o banco e a bandeira. Não pedimos o número completo do cartão nem dados de segurança.</p>
+  <div class="field"><label>Banco</label><div class="bank-grid" id="bankPicker"></div></div>
+  <div class="field"><label for="cardFlag">Bandeira</label><select id="cardFlag"><option>Visa</option><option>Mastercard</option><option>Elo</option><option>Hipercard</option><option>Outra</option></select></div>
+  <div class="field"><label for="cardKind">Tipo</label><select id="cardKind"><option>Crédito</option><option>Débito</option><option>Crédito e débito</option></select></div>
+  <div class="row"><div class="field"><label for="cardLimit">Limite (R$)</label><input id="cardLimit" type="number" min="0" step=".01" placeholder="0,00"></div><div class="field"><label for="cardClosing">Fechamento</label><input id="cardClosing" type="number" min="1" max="31" placeholder="Dia"></div></div>
+  <div class="field"><label for="cardDue">Vencimento da fatura</label><input id="cardDue" type="number" min="1" max="31" placeholder="Dia"></div>
+  <button class="primary" id="saveCard">Adicionar cartão</button>
+ </div>
+ <div class="card"><h2>Cartões cadastrados</h2><div id="cardList"></div></div>
+</section>
+
+<section class="page" id="bills">
+ <div class="card"><h2>🧾 Boletos e compras online</h2><p class="hint">Organize boletos emitidos pelas lojas. O pagamento é feito no aplicativo do banco ou no canal oficial da loja.</p>
+ <form id="billForm">
+  <div class="field"><label for="store">Loja</label><select id="store"><option>Shein</option><option>Shopee</option><option>AliExpress</option><option>Outra loja</option></select></div>
+  <div class="field"><label for="billDescription">Descrição da compra</label><input id="billDescription" maxlength="70" placeholder="Ex.: pedido de roupas"></div>
+  <div class="field"><label for="billValue">Valor do boleto (R$)</label><input id="billValue" type="number" min="0.01" step=".01" required placeholder="0,00"></div>
+  <div class="field"><label for="barcode">Linha digitável (opcional)</label><input id="barcode" inputmode="numeric" placeholder="Digite ou cole a linha digitável"></div>
+  <div class="field"><label for="billDue">Vencimento</label><input id="billDue" type="date" required></div>
+  <button class="primary" type="submit">Salvar boleto</button>
+ </form></div>
+ <div class="card"><h2>Meus boletos</h2><div id="billList"></div></div>
+ </section>
+
+<section class="page" id="reports">
+ <div class="card"><h2>📊 Relatórios</h2><div class="field"><label for="reportMonth">Mês do relatório</label><input id="reportMonth" type="month"></div>
+ <div class="summaryrow"><span>Receitas</span><strong class="positive" id="reportIncome">R$ 0,00</strong></div><div class="summaryrow"><span>Despesas</span><strong class="negative" id="reportExpense">R$ 0,00</strong></div><div class="summaryrow"><span>Resultado</span><strong id="reportBalance">R$ 0,00</strong></div>
+ <h3 style="font-size:14px">Despesas por categoria</h3><div id="categoryReport"></div></div>
+ </section>
+
+<section class="page" id="backup">
+ <div class="card"><h2>☁️ Backup e segurança</h2><p class="hint">Exporte uma cópia dos seus dados para guardar em local seguro. Para restaurar, escolha um arquivo de backup JSON criado por este aplicativo.</p>
+ <button class="primary" id="exportBackup">Baixar backup completo</button>
+ <div class="field"><label for="restoreFile">Restaurar backup</label><input type="file" id="restoreFile" accept="application/json,.json"></div>
+ <button class="secondary" id="restoreBackup" style="width:100%">Restaurar dados do arquivo</button>
+ <p class="hint">O backup inclui movimentações, renda, cartões e boletos. Guarde o arquivo com cuidado: ele contém informações financeiras pessoais.</p></div>
+ </section>
+
+<section class="page" id="settings">
+ <div class="card"><h2>⚙️ Ajustes</h2><div class="summaryrow"><span>Visual do aplicativo</span><strong>Banco digital</strong></div><div class="field"><label for="theme">Tema</label><select id="theme"><option value="light">Claro</option><option value="dark">Escuro</option><option value="auto">Automático</option></select></div><button class="secondary" id="applyTheme" style="width:100%">Aplicar tema</button><p class="hint">Seus dados ficam armazenados neste aparelho. A desinstalação ou limpeza dos dados do app pode apagá-los; mantenha backups atualizados.</p></div>
+ </section>
+ <div class="foot">Meu Controle Financeiro · Seus dados ficam neste aparelho.</div>
+</main>
+<nav class="nav">
+ <button class="active" data-nav="home"><span>⌂</span>Início</button>
+ <button data-nav="cards"><span>▣</span>Cartões</button>
+ <button data-nav="reports"><span>▥</span>Relatórios</button>
+ <button data-nav="bills"><span>▤</span>Boletos</button>
+ <button data-nav="settings"><span>⚙</span>Ajustes</button>
+</nav>
+<script>
+const KEYS={expenses:'mcf_expenses_v1',income:'mcf_income_by_month_v2',oldIncome:'mcf_income_v1',cards:'mcf_cards_v1',bills:'mcf_bills_v1',theme:'mcf_theme_v1'};
+const $=id=>document.getElementById(id),money=n=>Number(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today=new Date().toISOString().slice(0,10);let month=new Date().toISOString().slice(0,7),filterType='expense',selectedBank='Nubank';
+const banks=[['Nubank','#7825a8'],['Banco do Brasil','#e3b51b'],['Itaú','#e87524'],['Bradesco','#c32635'],['Santander','#c82032'],['Inter','#f47721'],['Caixa','#1764a5'],['C6 Bank','#252525'],['Outro banco','#315b91']];
+function read(k,fb){try{let v=JSON.parse(localStorage.getItem(k));return v??fb}catch{return fb}}
+let expenses=read(KEYS.expenses,[]);if(!Array.isArray(expenses))expenses=[];
+let incomes=read(KEYS.income,{});if(!incomes||Array.isArray(incomes))incomes={};
+if(!Object.keys(incomes).length&&localStorage.getItem(KEYS.oldIncome)!==null)incomes[month]=localStorage.getItem(KEYS.oldIncome);
+let cards=read(KEYS.cards,[]);if(!Array.isArray(cards))cards=[];
+let bills=read(KEYS.bills,[]);if(!Array.isArray(bills))bills=[];
+expenses=expenses.map(x=>({...x,month:x.month||(x.due?x.due.slice(0,7):month)}));
+function persist(){localStorage.setItem(KEYS.expenses,JSON.stringify(expenses));localStorage.setItem(KEYS.income,JSON.stringify(incomes));localStorage.setItem(KEYS.cards,JSON.stringify(cards));localStorage.setItem(KEYS.bills,JSON.stringify(bills))}
+function nav(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));document.querySelectorAll('[data-nav]').forEach(b=>b.classList.toggle('active',b.dataset.nav===page));renderAll();window.scrollTo(0,0)}
+document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>nav(b.dataset.nav));
+document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>nav(b.dataset.goto));
+$('goIncome').onclick=()=>{filterType='income';nav('transactions');setType()};
+$('goExpense').onclick=()=>{filterType='expense';nav('transactions');setType()};
+$('currentMonth').onclick=()=>{month=new Date().toISOString().slice(0,7);renderAll()};
+$('monthSelect').onchange=()=>{month=$('monthSelect').value;renderAll()};
+function setType(){ $('typeExpense').classList.toggle('active',filterType==='expense');$('typeIncome').classList.toggle('active',filterType==='income');$('transactionTitle').textContent=filterType==='income'?'＋ Cadastrar receita':'－ Cadastrar despesa';}
+$('typeExpense').onclick=()=>{filterType='expense';setType()};$('typeIncome').onclick=()=>{filterType='income';setType()};
+$('transactionForm').onsubmit=e=>{e.preventDefault();let val=Number($('value').value),desc=$('description').value.trim();if(!desc||!Number.isFinite(val)||val<=0)return;expenses.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),description:desc,category:$('category').value,value:val,due:$('due').value,paid:true,type:filterType,month});$('transactionForm').reset();persist();renderAll();};
+function renderTransactions(){let arr=expenses.filter(x=>x.month===month);$('transactionList').innerHTML=arr.length?arr.map(x=>`<div class="item"><div class="itemtop"><div><div class="itemname">${esc(x.description)}</div><div class="meta">${esc(x.category)} · ${x.type==='income'?'Receita':'Despesa'}</div></div><strong class="amount ${x.type==='income'?'positive':'negative'}">${x.type==='income'?'+':'−'} ${money(x.value)}</strong></div><div class="actions"><span class="meta">${x.due?new Date(x.due+'T12:00:00').toLocaleDateString('pt-BR'):''}</span><button class="danger" data-del-tx="${esc(x.id)}">Excluir</button></div></div>`).join(''):'<div class="empty">Nenhuma movimentação neste mês.</div>';document.querySelectorAll('[data-del-tx]').forEach(b=>b.onclick=()=>{if(confirm('Excluir movimentação?')){expenses=expenses.filter(x=>x.id!==b.dataset.delTx);persist();renderAll()}})}
+function renderBankPicker(){$('bankPicker').innerHTML=banks.map(([n,c])=>`<button type="button" class="bank ${selectedBank===n?'selected':''}" data-bank="${esc(n)}"><span class="swatch" style="background:${c}"></span>${esc(n)}</button>`).join('');document.querySelectorAll('[data-bank]').forEach(b=>b.onclick=()=>{selectedBank=b.dataset.bank;renderBankPicker()})}
+$('saveCard').onclick=()=>{let limit=Number($('cardLimit').value||0);cards.push({id:String(Date.now()),bank:selectedBank,color:banks.find(x=>x[0]===selectedBank)[1],flag:$('cardFlag').value,kind:$('cardKind').value,limit,closing:$('cardClosing').value,due:$('cardDue').value});['cardLimit','cardClosing','cardDue'].forEach(id=>$(id).value='');persist();renderAll();};
+function cardHtml(c){return `<div class="bankcard" style="--bank:${c.color}"><div class="bankname">${esc(c.bank)}</div><div class="last">•••• &nbsp; •••• &nbsp; ••••</div><div style="display:flex;justify-content:space-between;gap:8px"><div><small>${esc(c.kind)} · ${esc(c.flag)}</small><div><b>Limite ${money(c.limit)}</b></div></div><div style="text-align:right"><small>Fechamento ${esc(c.closing||'—')} · Vence ${esc(c.due||'—')}</small></div></div></div>`}
+function renderCards(){$('homeCards').innerHTML=cards.length?cards.slice(0,1).map(cardHtml).join(''):'Nenhum cartão cadastrado.';$('cardList').innerHTML=cards.length?cards.map(c=>`<div class="item">${cardHtml(c)}<button class="danger" data-del-card="${esc(c.id)}">Remover cartão</button></div>`).join(''):'<div class="empty">Cadastre seu primeiro cartão acima.</div>';document.querySelectorAll('[data-del-card]').forEach(b=>b.onclick=()=>{if(confirm('Remover cartão?')){cards=cards.filter(c=>c.id!==b.dataset.delCard);persist();renderAll()}})}
+$('billForm').onsubmit=e=>{e.preventDefault();let val=Number($('billValue').value);if(!Number.isFinite(val)||val<=0)return;bills.unshift({id:String(Date.now()),store:$('store').value,description:$('billDescription').value.trim(),value:val,barcode:$('barcode').value.trim(),due:$('billDue').value,paid:false});$('billForm').reset();persist();renderAll()};
+function billCard(b){return `<div class="item"><div class="itemtop"><div><div class="itemname">${esc(b.store)}${b.description?' · '+esc(b.description):''}</div><div class="meta">Vencimento: ${b.due?new Date(b.due+'T12:00:00').toLocaleDateString('pt-BR'):'Não informado'}</div></div><div style="text-align:right"><strong>${money(b.value)}</strong><div><span class="status ${b.paid?'paid':'pending'}">${b.paid?'Pago':'Pendente'}</span></div></div></div>${b.barcode?`<div class="meta">Linha digitável: ${esc(b.barcode)}</div>`:''}<div class="actions"><label class="meta"><input type="checkbox" data-paid-bill="${esc(b.id)}" ${b.paid?'checked':''} style="width:auto;min-height:auto"> Marcar como pago</label><button class="danger" data-del-bill="${esc(b.id)}">Excluir</button></div></div>`}
+function renderBills(){$('billList').innerHTML=bills.length?bills.map(billCard).join(''):'<div class="empty">Nenhum boleto cadastrado.</div>';$('homeBills').textContent=String(bills.filter(b=>!b.paid).length);$('homeBillsList').innerHTML=bills.length?bills.slice(0,2).map(b=>`<div class="summaryrow"><span>${esc(b.store)} · ${b.due?new Date(b.due+'T12:00:00').toLocaleDateString('pt-BR'):''}</span><strong>${money(b.value)}</strong></div>`).join(''):'Nenhum boleto cadastrado.';document.querySelectorAll('[data-paid-bill]').forEach(el=>el.onchange=()=>{let b=bills.find(x=>x.id===el.dataset.paidBill);if(b){b.paid=el.checked;persist();renderAll()}});document.querySelectorAll('[data-del-bill]').forEach(b=>b.onclick=()=>{if(confirm('Excluir boleto?')){bills=bills.filter(x=>x.id!==b.dataset.delBill);persist();renderAll()}})}
+function report(monthValue){let a=expenses.filter(x=>x.month===monthValue),inc=a.filter(x=>x.type==='income').reduce((s,x)=>s+Number(x.value),0)+(Number(incomes[monthValue])||0),out=a.filter(x=>x.type!=='income').reduce((s,x)=>s+Number(x.value),0),balance=inc-out;$('reportIncome').textContent=money(inc);$('reportExpense').textContent=money(out);$('reportBalance').textContent=money(balance);$('reportBalance').className=balance<0?'negative':'positive';let cats={};a.filter(x=>x.type!=='income').forEach(x=>cats[x.category]=(cats[x.category]||0)+Number(x.value));let entries=Object.entries(cats).sort((x,y)=>y[1]-x[1]);$('categoryReport').innerHTML=entries.length?entries.map(([k,v])=>`<div class="summaryrow"><span>${esc(k)}</span><strong>${money(v)}</strong></div>`).join(''):'<div class="empty">Sem despesas para este mês.</div>'}
+$('reportMonth').value=month;$('reportMonth').onchange=()=>report($('reportMonth').value);
+$('exportBackup').onclick=()=>{persist();let data={format:'mcf-backup-v1',createdAt:new Date().toISOString(),expenses,incomes,cards,bills};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='meu-controle-financeiro-backup-'+today+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+$('restoreBackup').onclick=async()=>{let f=$('restoreFile').files[0];if(!f){alert('Escolha um arquivo de backup primeiro.');return}try{let d=JSON.parse(await f.text());if(d.format!=='mcf-backup-v1'||!Array.isArray(d.expenses)||!d.incomes||!Array.isArray(d.cards)||!Array.isArray(d.bills))throw Error('Formato inválido');if(!confirm('A restauração substituirá os dados atuais. Deseja continuar?'))return;expenses=d.expenses;incomes=d.incomes;cards=d.cards;bills=d.bills;persist();renderAll();alert('Backup restaurado com sucesso.')}catch(e){alert('Não foi possível restaurar: arquivo inválido ou incompatível.')}};
+$('applyTheme').onclick=()=>{let t=$('theme').value;localStorage.setItem(KEYS.theme,t);applyTheme()};
+function applyTheme(){let t=localStorage.getItem(KEYS.theme)||'light';$('theme').value=t;document.body.classList.toggle('dark',t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches))}
+function renderHome(){let a=expenses.filter(x=>x.month===month),inc=a.filter(x=>x.type==='income').reduce((s,x)=>s+Number(x.value),0)+(Number(incomes[month])||0),out=a.filter(x=>x.type!=='income').reduce((s,x)=>s+Number(x.value),0),pending=bills.filter(x=>!x.paid).reduce((s,x)=>s+Number(x.value),0);$('balance').textContent=money(inc-out);$('homeBalance').textContent=money(inc-out);$('incomeTotal').textContent=money(inc);$('expenseTotal').textContent=money(out);$('homePending').textContent=money(pending);$('monthSelect').value=month}
+function renderAll(){renderHome();renderTransactions();renderBankPicker();renderCards();renderBills();report($('reportMonth').value||month);persist()}
+applyTheme();setType();renderAll();
+</script></body></html>
